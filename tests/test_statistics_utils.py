@@ -69,20 +69,29 @@ class TestStatisticsUtils(unittest.TestCase):
         """Test que verifica que el método moving_average lanza un ValueError cuando
         se proporciona una ventana (window) inválida.
         
-        Escenario esperado:
-        - Crear una lista de números (ej: [1, 2, 3])
-        - Llamar a moving_average con window=0 (valor no positivo) y verificar que se lanza un ValueError (usar self.assertRaises)
-        - Llamar a moving_average con window mayor que la longitud del array y verificar que se lanza un ValueError (usar self.assertRaises)
-        """
+        Escenario esperado:"""
+        utils = StatisticsUtils()
+        #- Crear una lista de números (ej: [1, 2, 3])
+        arr = [1, 2, 3]
+
+        #- Llamar a moving_average con window=0 (valor no positivo) y verificar que se lanza un ValueError (usar self.assertRaises)
+        with self.assertRaises(ValueError):
+            utils.moving_average(arr, window=0)
+        #- Llamar a moving_average con window mayor que la longitud del array y verificar que se lanza un ValueError (usar self.assertRaises)
+        with self.assertRaises(ValueError):
+            utils.moving_average(arr, window=5)
 
     def test_moving_average_only_accepts_1d_sequences(self):
         """Test que verifica que el método moving_average lanza un ValueError cuando
         se llama con una secuencia multidimensional.
         
-        Escenario esperado:
-        - Crear una secuencia bidimensional (ej: [[1, 2], [3, 4]])
-        - Llamar a moving_average con esa secuencia y verificar que se lanza un ValueError indicando que solo se aceptan secuencias 1D (usar self.assertRaises)
-        """
+        Escenario esperado:"""
+        utils = StatisticsUtils()
+        #- Crear una secuencia bidimensional (ej: [[1, 2], [3, 4]])
+        arr = [[1, 2], [3, 4]]
+        #- Llamar a moving_average con esa secuencia y verificar que se lanza un ValueError indicando que solo se aceptan secuencias 1D (usar self.assertRaises)
+        with self.assertRaises(ValueError):
+            utils.moving_average(arr, window=2)
 
     def test_zscore_has_mean_zero_and_unit_std(self):
         """Test que verifica que el método zscore calcula correctamente los z-scores
